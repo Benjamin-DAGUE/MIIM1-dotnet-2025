@@ -1,0 +1,49 @@
+﻿@* 
+  @using permet d'ajouter un namespace.
+  Il est possible de définir les using dans fichier _Imports.razor
+*@
+@* @using CoursBlazor.Parameters.Components.Shared *@
+@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@* Pour appeler un composant sans faire un using de son espace de nom, on peut utiliser son nom compelt. *@
+@* <CoursBlazor.Parameters.Components.Shared.ChildComponent/> *@
+
+@*  
+  Il est possible de descendre des valeurs à un composant via ses paramètres.
+*@
+@* <ChildComponent Value="@_test"/> *@
+
+@*
+  Pour remonter une information depuis un composant, il est nécessaire d'utiliser un paramètre de type EventCallback.
+*@
+@* <ChildComponent Value="@_test" ValueChanged="@((val) => _test = val)" /> *@
+
+@*
+  Si un composant dispose d'un paramètre (comme ici Value) et dispose aussi d'un second paramètre de type EventCallback (comme ValueChanged)
+  Il est alors possible d'utilise @bind-Value=_test qui est l'équivalent de Value="@_test" ValueChanged="@((val) => _test = val)"
+*@
+@* <ChildComponent @bind-Value=_test /> *@
+
+@*
+  Pour ajouter du comportement à un binding, il est possible d'utilise @bind-Value:after pour spécifier un callback.
+*@
+<ChildComponent @bind-Value=_test @bind-Value:after=AfterValueChanged />
+
+<h2>@_test</h2>
+<h2>@_testAfter</h2>
+
+@code {
+    private string _test = "test from HOME";
+    private string _testAfter = "";
+
+    private void AfterValueChanged()
+    {
+        _testAfter = _test;
+    }
+}

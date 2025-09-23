@@ -1,0 +1,20 @@
+﻿<h3>ChildComponent</h3>
+
+<span>@Value</span>
+
+<button @onclick=SetRandomValue>RNG</button>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string? Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private void SetRandomValue()
+    {
+        Value = Guid.NewGuid().ToString();
+        ValueChanged.InvokeAsync(Value);
+    }
+}
