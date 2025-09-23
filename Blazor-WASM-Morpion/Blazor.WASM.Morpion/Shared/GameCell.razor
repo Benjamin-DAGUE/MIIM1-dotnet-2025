@@ -1,0 +1,15 @@
+﻿@*
+  Ce composant représente une cellule du jeu.
+*@
+<div class="cell" @onclick="HandleClick">
+
+    @if (Value == CellValue.X)
+    {
+        <span>X</span>
+    }
+    else if (Value == CellValue.O)
+    {
+        <span>O</span>
+    }
+
+</div>

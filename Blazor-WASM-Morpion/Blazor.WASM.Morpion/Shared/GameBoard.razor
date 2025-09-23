@@ -1,0 +1,31 @@
+﻿@*
+  On affiche un board
+*@
+<div class="board">
+
+    @*
+      Pour chaque index (0, 1, 2), on affiche une ligne 
+    *@
+
+    @foreach (int row in _indexes)
+    {
+        <div class="board-row">
+            @*
+              Pour chaque index (0, 1, 2), on affiche une cellule
+            *@
+            @foreach (int col in _indexes)
+            {
+                @*
+                GameCell.CurrentPlayer permet de redescendre le joueur actif
+                ReadOnly permet de bloquer les cellules lorsque la partie est terminée
+                @bind-Value permet d'associer une cellule de la matrice _cells à un composant enfant et d'en récupérer la valeur.
+                @bind-Value:after permet d'ajouter du comportement après la modification d'une valeur de cellule par un composant enfant.
+              *@
+                <GameCell CurrentPlayer=_currentPlayer
+                          ReadOnly=@(Winner != null)
+                          @bind-Value="_cells[row, col]"
+                          @bind-Value:after=@(() => OnCellValueChanged(row, col)) />
+            }
+        </div>
+    }
+</div>

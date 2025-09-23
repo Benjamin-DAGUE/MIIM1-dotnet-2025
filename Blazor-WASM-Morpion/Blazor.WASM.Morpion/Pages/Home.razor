@@ -1,0 +1,20 @@
+﻿@page "/"
+
+<PageTitle>Morpion</PageTitle>
+
+<h1>Jeu du morpion</h1>
+
+@*
+  @ref=_gameBoard permet de récupérer la référence du composant GameBoard dans une variable (cf. Home.razor.cs)
+  La variable _winner est synchronisée entre le composant Home et le composant GameBoard. Cela permet de récupérer le gagnant.
+*@
+<GameBoard @ref=_gameBoard @bind-Winner="_winner"/>
+
+@*
+  Cette section s'affiche uniquement si on a un gagnant (ou une égalité)
+*@
+@if(_winner != null)
+{
+    <h1>@GetResultString()</h1>
+    <button @onclick=ResetGame>Rejouer</button>
+}
