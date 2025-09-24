@@ -1,0 +1,36 @@
+﻿@page "/"
+@* On demande au contenur de DI d'injecter une dépendance du service TMDBService *@
+@inject TMDBServiceV2 TMDBService;
+
+<PageTitle>Home</PageTitle>
+
+
+<MudContainer>
+    <MudPaper Width="100%" Square="true" Class="mud-theme-primary">
+        <h1>Hello, world!</h1>
+
+        @if (_apiResults == null)
+        {
+            <span>Chargement en cours</span>
+        }
+        else
+        {
+            @foreach (Movie movie in _apiResults.Results)
+            {
+                <MudCard>
+                    <MudCardHeader>
+                        <MudText>@movie.Title</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudImage Src="@("https://image.tmdb.org/t/p/w500" + movie.PosterPath)" />
+                    </MudCardContent>
+                </MudCard>
+
+
+            }
+        }
+
+
+    </MudPaper>
+</MudContainer>
+
